@@ -1,4 +1,4 @@
-$(document).ready(function() { 
+ $(document).ready(function() { 
     $('.hero-content h3').click(function(){
       var subText = $(this).text();
        $(this).text(subText + "!");
@@ -15,4 +15,19 @@ $(document).ready(function() {
    };
  
     $('.selling-points .point').hover(onHoverAction, offHoverAction);
+  
+  $('.hero-content h3').hover(function(){
+    $(this).css({
+      color:'red'
+      });
+    });
+
   });
+
+ 
+    
+
+
+
+
+
