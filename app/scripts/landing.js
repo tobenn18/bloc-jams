@@ -18,7 +18,7 @@
   
   $('.hero-content h3').hover(function(){
     $(this).css({
-      color:'red'
+      color:'green'
       });
     });
 

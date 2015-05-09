@@ -92,6 +92,7 @@
 })();
 require.register("scripts/app", function(exports, require, module) {
 require("./landing");
+//
 });
 
 ;require.register("scripts/landing", function(exports, require, module) {
@@ -115,7 +116,7 @@ require("./landing");
   
   $('.hero-content h3').hover(function(){
     $(this).css({
-      color:'red'
+      color:'green'
       });
     });
 
