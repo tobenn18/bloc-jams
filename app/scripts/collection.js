@@ -19,8 +19,8 @@ var buildAlbumThumbnail = function() {
 var updateCollectionView = function(){
     var $collection = $(".collection-container .row");
     $collection.empty();
-
-    for(var i = 0; i < 33; i ++){
+    var $albums = Math.floor(Math.random() * 76) + 25;
+    for(var i = 0; i < $albums; i ++){
         var $newThumbnail = buildAlbumThumbnail();
         $collection.append($newThumbnail);
     };
