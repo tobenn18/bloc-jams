@@ -1,0 +1,65 @@
+.player-bar {
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   height: 150px;
+   background: rgba(255, 255, 255, 0.3);
+   z-index: 100;
+    
+        a, a:hover {
+           color: white;
+           cursor: pointer;
+           text-decoration: none;
+        }
+
+
+    .container {
+       display: table;
+       padding: 0;
+       min-height: 100%;
+     }
+
+    .left-controls {
+       width: 25%;
+       text-align: left;
+    }
+     
+    .right-controls {
+       width: 25%;
+       text-align: right;
+    }
+
+    .play-controls{
+       a{
+            font-size: 20px;
+            vertical-align: middle;
+        }
+        
+        .previous {
+            margin-right: 65px;
+        }
+     
+        .play-pause {
+            margin-right: 60px;
+            font-size: 30px
+            transition: all 100ms ease-in-out;
+        }
+        .play-pause:hover{
+            opacity:0.4;
+        }
+    }
+}
+
+    
+
+
+
+
+
+
+
+
+
+
+
