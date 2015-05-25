@@ -391,7 +391,7 @@ var selectTabHandler = function(event){
     $tab.parent().addClass('active');
     selectedTabName = $tab.attr('href');
     console.log(selectedTabName);
-    $(".tab-pane").addClassName('hidden');
+    $(".tab-pane").addClass('hidden');
     $(selectedTabName).removeClass('hidden');
     event.preventDefault();
 };
