@@ -11,12 +11,19 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
      controller: 'Landing.controller',
      templateUrl: '/templates/landing.html'
    });
+   
+   $stateProvider.state('collection', {
+     url: '/collection',
+     controller: 'Collection.controller',
+     templateUrl: '/templates/collection.html'
+   });
+
  }]);
  
  // This is a cleaner way to call the controller than crowding it on the module definition.
  blocJams.controller('Landing.controller', ['$scope', function($scope) {
    $scope.subText = "Turn the music up!";
-   
+
    $scope.subTextClicked = function() {
      $scope.subText += '!';
    };      
