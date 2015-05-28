@@ -2,7 +2,25 @@
 //require('./collection');
 //require('./album');
 //require('./profile');
-blocJams = angular.module('BlocJams', ['ui.router']);
+ 
+ var albumPicasso = {
+   name: 'The Colors',
+   artist: 'Pablo Picasso',
+   label: 'Cubism',
+   year: '1881',
+   albumArtUrl: '/images/album-placeholder.png',
+ 
+   songs: [
+       { name: 'Blue', length: '4:26' },
+       { name: 'Green', length: '3:14' },
+       { name: 'Red', length: '5:01' },
+       { name: 'Pink', length: '3:21'},
+       { name: 'Magenta', length: '2:15'}
+     ]
+ };
+ 
+ 
+blocJams = angular.module('blocJams', ['ui.router']);
 blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider) {
    $locationProvider.html5Mode(true);
  
@@ -16,6 +34,13 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
      url: '/collection',
      controller: 'Collection.controller',
      templateUrl: '/templates/collection.html'
+   });
+
+   
+   $stateProvider.state('album', {
+     url: '/album',
+     templateUrl: '/templates/album.html',
+     controller: 'Album.controller'
    });
 
  }]);
@@ -44,9 +69,19 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
         for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
         return o;
     };
+ 
  $scope.shuffleClicked = function(){
     $scope.shuffle($scope.albumURLs);
  };
-
 }]);
 
+ blocJams.controller('Collection.controller', ['$scope', function($scope) {
+  $scope.albums = [];
+   for (var i = 0; i < 33; i++) {
+     $scope.albums.push(angular.copy(albumPicasso));
+   };
+}]);
+
+ blocJams.controller('Album.controller', ['$scope', function($scope) {
+   $scope.album = angular.copy(albumPicasso);
+ }]);
