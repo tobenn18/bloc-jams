@@ -19,14 +19,14 @@ var albumPicasso = {
      ]
  };
  
-
+var playBar={
+  playerUrl:'/templates/player_bar.html'
+};
  
 blocJams = angular.module('BlocJams', ['ui.router']);
 
 blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider) {
    $locationProvider.html5Mode(true);
-
-
  
    $stateProvider.state('landing', {
      url: '/',
@@ -43,9 +43,14 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
     $stateProvider.state('album', {
      url: '/album',
      controller: 'Album.controller',
-     templateUrl: '/templates/album.html',
+     templateUrl: '/templates/album.html'
    });
 
+    $stateProvider.state('player_bar',{
+      url: 'player_bar',
+      controller: 'Player_bar.controller',
+      template:'/templates/player_bar'
+    });
 
  }]);
  
@@ -143,3 +148,7 @@ blocJams.controller('Album.controller', ['$scope', function($scope) {
     };
 
  }]);
+blocJams.controller('Player_bar.controller', ['$scope', function($scope){
+$scope.player_bar = angular.copy(playBar);
+}]);
+
