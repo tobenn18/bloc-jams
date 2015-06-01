@@ -22,9 +22,8 @@
          <div class="container">
            <div class='navbar-header'> <!-- Nav Bar -->
              <a class='logo navbar-left'>
-               <ng-include src="'/templates/player_bar.html'"></ng-include>
+                <a ui-sref='landing' class='logo navbar-left'>
                   <img src="/images/blocjams.png">
-                </a>
              </a>
            </div>
           <ul class="nav navbar-nav navbar-right">
@@ -32,8 +31,6 @@
           </ul>
          </div>
       </nav>
-      <!-- Render templates here -->
-     
-     <div ui-view> </div>
-  </body>
+      <div ui-view></div>
+    </body>
 </html>   

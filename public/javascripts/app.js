@@ -1,9 +1,9 @@
 //require('./landing');
-//require('./collection');
-//require('./album');
-//require('./profile');
- 
- var albumPicasso = {
+ //require('./album');
+ //require('./collection');
+ //require('./profile');
+
+var albumPicasso = {
    name: 'The Colors',
    artist: 'Pablo Picasso',
    label: 'Cubism',
@@ -19,10 +19,14 @@
      ]
  };
  
+
  
 blocJams = angular.module('BlocJams', ['ui.router']);
+
 blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider) {
    $locationProvider.html5Mode(true);
+
+
  
    $stateProvider.state('landing', {
      url: '/',
@@ -36,12 +40,13 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
      templateUrl: '/templates/collection.html'
    });
 
-   
-   $stateProvider.state('album', {
+    $stateProvider.state('album', {
      url: '/album',
+     controller: 'Album.controller',
      templateUrl: '/templates/album.html',
-     controller: 'Album.controller'
    });
+
+
  }]);
  
  // This is a cleaner way to call the controller than crowding it on the module definition.
@@ -72,6 +77,7 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
  $scope.shuffleClicked = function(){
     $scope.shuffle($scope.albumURLs);
  };
+
 }]);
 
  blocJams.controller('Collection.controller', ['$scope', function($scope) {
@@ -79,25 +85,12 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
    for (var i = 0; i < 33; i++) {
      $scope.albums.push(angular.copy(albumPicasso));
    };
-}]);
 
- blocJams.controller('Album.controller', ['$scope', function($scope) {
-   $scope.album = angular.copy(albumPicasso);
+  $scope.offHoverSong = function(song) {
+    hoveredSong = null;
+  };
 
-    var hoveredSong = null;
-   var playingSong = null;
- 
-   $scope.onHoverSong = function(song) {
-     hoveredSong = song;
-   };
- 
-   $scope.offHoverSong = function(song) {
-     hoveredSong = null;
-   };
-
-
-
-  $scope.getSongState = function(song) {
+    $scope.getSongState = function(song) {
       if (song === playingSong) {
         return 'playing';
       }
@@ -114,9 +107,39 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
     $scope.pauseSong = function(song) {
       playingSong = null;
     };
+}]);
 
+
+blocJams.controller('Album.controller', ['$scope', function($scope) {
+   $scope.album = angular.copy(albumPicasso);
+
+ var hoveredSong = null;
+   var playingSong = null;
+ 
+   $scope.onHoverSong = function(song) {
+     hoveredSong = song;
+   };
+ 
+   $scope.offHoverSong = function(song) {
+     hoveredSong = null;
+   };
+  
+  $scope.getSongState = function(song) {
+     if (song === playingSong) {
+       return 'playing';
+     }
+     else if (song === hoveredSong) {
+       return 'hovered';
+     }
+     return 'default';
+   };
+
+    $scope.playSong = function(song) {
+      playingSong = song;
+    };
+ 
+    $scope.pauseSong = function(song) {
+      playingSong = null;
+    };
 
  }]);
-
-
-
