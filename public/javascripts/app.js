@@ -50,7 +50,7 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
       url: 'player_bar',
       controller: 'Player_bar.controller',
       template:'/templates/player_bar'
-    });
+    });<!---->
 
  }]);
  
