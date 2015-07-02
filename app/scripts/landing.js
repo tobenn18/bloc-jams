@@ -3,7 +3,7 @@
       var subText = $(this).text();
       $(this).text(subText + "!");
     });
- });
+
  
    var onHoverAction = function(event) {
      console.log('Hover action triggered.');
