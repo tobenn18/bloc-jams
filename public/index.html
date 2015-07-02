@@ -17,7 +17,8 @@
        require('scripts/app');
      </script> 
   </head>
-    <body>
+   <body>
+      
       <nav class="player-header-nav navbar">
          <div class="container">
            <div class='navbar-header'> <!-- Nav Bar -->
@@ -25,15 +26,16 @@
                <ng-include src="'/templates/player_bar.html'"></ng-include>
                   <img src="/images/blocjams.png">
                 </a>
-             </a>
+            
            </div>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a ui-sref='collection'>Library</a></li>
-          </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a ui-sref='collection'>Library</a></li>
+            </ul>
          </div>
       </nav>
       <!-- Render templates here -->
-     <div ui-view="content"></div>
-     <div ui-view="playerBar"></div>
+     
+     <div ui-view></div>
+
   </body>
-</html> <!-->  
+</html> 
