@@ -461,7 +461,7 @@ blocJams.controller('PlayerBar.controller', ['$scope', 'SongPlayer', function($s
      }
    };
  });
-
+<!---->
 });
 
 ;require.register("scripts/collection", function(exports, require, module) {

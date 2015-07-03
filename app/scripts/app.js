@@ -192,3 +192,4 @@ blocJams.controller('PlayerBar.controller', ['$scope', 'SongPlayer', function($s
      }
    };
  });
+<!---->
