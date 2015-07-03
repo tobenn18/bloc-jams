@@ -18,22 +18,25 @@ var albumPicasso = {
        { name: 'Magenta', length: '2:15'}
      ]
  };
- 
-var playBar={
-  playerUrl:'/templates/player_bar.html'
-};
+ angular.module('BlocJams', []).controller('Landing.controller', ['$scope', function($scope) {
+  console.log("Landing.controller");
+  
+}]);
+
  
 blocJams = angular.module('BlocJams', ['ui.router']);
 
 blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider) {
    $locationProvider.html5Mode(true);
+
+
  
    $stateProvider.state('landing', {
      url: '/',
      controller: 'Landing.controller',
      templateUrl: '/templates/landing.html'
    });
-
+   
    $stateProvider.state('collection', {
      url: '/collection',
      controller: 'Collection.controller',
@@ -43,14 +46,9 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
     $stateProvider.state('album', {
      url: '/album',
      controller: 'Album.controller',
-     templateUrl: '/templates/album.html'
+     templateUrl: '/templates/album.html',
    });
 
-    $stateProvider.state('player_bar',{
-      url: '/player_bar',
-      controller: 'Player_bar.controller',
-      templateUrl:'/templates/player_bar.html'
-    });
 
  }]);
  
@@ -118,13 +116,8 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
 blocJams.controller('Album.controller', ['$scope','SongPlayer', function($scope, SongPlayer) {
    $scope.album = angular.copy(albumPicasso);
 
-<<<<<<< HEAD
-   var hoveredSong = null;
-   var playingSong = null;
-=======
  var hoveredSong = null;
    
->>>>>>> song-player-service
  
    $scope.onHoverSong = function(song) {
      hoveredSong = song;
@@ -134,13 +127,8 @@ blocJams.controller('Album.controller', ['$scope','SongPlayer', function($scope,
      hoveredSong = null;
    };
   
-<<<<<<< HEAD
-   $scope.getSongState = function(song) {
-     if (song === playingSong) {
-=======
   $scope.getSongState = function(song) {
      if (song === SongPlayer.currentSong && SongPlayer.playing) {
->>>>>>> song-player-service
        return 'playing';
      }
      else if (song === hoveredSong) {
@@ -149,14 +137,6 @@ blocJams.controller('Album.controller', ['$scope','SongPlayer', function($scope,
      return 'default';
    };
 
-<<<<<<< HEAD
-   $scope.playSong = function(song) {
-      playingSong = song;
-    };
- 
-   $scope.pauseSong = function(song) {
-      playingSong = null;
-=======
     $scope.playSong = function(song) {
       SongPlayer.setSong($scope.album, song);
       SongPlayer.play();
@@ -164,24 +144,20 @@ blocJams.controller('Album.controller', ['$scope','SongPlayer', function($scope,
  
     $scope.pauseSong = function(song) {
        SongPlayer.pause();
->>>>>>> song-player-service
     };
 
  }]);
 
-<<<<<<< HEAD
-blocJams.controller('Player_bar.controller', ['$scope', function($scope){
-   $scope.player_bar = angular.copy(playBar);
-
-}]);
-
-=======
 blocJams.controller('PlayerBar.controller', ['$scope', 'SongPlayer', function($scope, SongPlayer) {
    $scope.songPlayer = SongPlayer;
  }]);
  
   
  blocJams.service('SongPlayer', function() {
+   var trackIndex = function(album,song){
+    return album.songs.indexOf(song);
+   };
+
    return {
      currentSong: null,
      currentAlbum: null,
@@ -193,10 +169,26 @@ blocJams.controller('PlayerBar.controller', ['$scope', 'SongPlayer', function($s
      pause: function() {
        this.playing = false;
      },
+     next: function(){
+      var currentTrackIndex = trackIndex(this.currentAlbum, this.currentSong);
+      currentTrackIndex++;
+      if(currentTrackIndex >= this.currentAlbum.songs.length){
+        currentTrackIndex = 0;
+      }
+      this.currentSong = this.currentAlbum.songs[currentTrackIndex];
+     },
+     previous: function() {
+       var currentTrackIndex = trackIndex(this.currentAlbum, this.currentSong);
+       currentTrackIndex--;
+       if (currentTrackIndex < 0) {
+         currentTrackIndex = this.currentAlbum.songs.length - 1;
+       }
+ 
+       this.currentSong = this.currentAlbum.songs[currentTrackIndex];
+     },
      setSong: function(album, song) {
        this.currentAlbum = album;
        this.currentSong = song;
      }
    };
  });
->>>>>>> song-player-service
