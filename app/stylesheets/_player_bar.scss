@@ -1,4 +1,4 @@
- .player-bar {
+.player-bar {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -85,7 +85,7 @@
         vertical-align: middle;
       }
  
-      .seek-bar {
+      .slider {
         display: inline-block;
         width: 100px;
         vertical-align: middle;
@@ -112,7 +112,7 @@
     }
   }
  
-  .seek-bar {
+ .slider {
     height: 5px;
     background: rgba(255, 255, 255, 0.3);
     border-radius: 2px;
@@ -154,16 +154,3 @@
     }
  
   }
-
-    
-
-
-
-
-
-
-
-
-
-
-

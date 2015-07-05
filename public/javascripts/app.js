@@ -298,8 +298,6 @@ blocJams = angular.module('BlocJams', ['ui.router']);
 blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider, $locationProvider) {
    $locationProvider.html5Mode(true);
 
-
- 
    $stateProvider.state('landing', {
      url: '/',
      controller: 'Landing.controller',
@@ -353,7 +351,6 @@ blocJams.config(['$stateProvider', '$locationProvider', function($stateProvider,
 }]);
 
  blocJams.controller('Collection.controller', ['$scope','SongPlayer', function($scope, SongPlayer) {
-
   $scope.albums = [];
    for (var i = 0; i < 33; i++) {
      $scope.albums.push(angular.copy(albumPicasso));
@@ -426,7 +423,7 @@ blocJams.controller('PlayerBar.controller', ['$scope', 'SongPlayer', function($s
  }]);
  
   
- blocJams.service('SongPlayer', function() {
+blocJams.service('SongPlayer', function() {
    var currentSoundFile = null;
 
    var trackIndex = function(album,song){
@@ -483,7 +480,50 @@ blocJams.controller('PlayerBar.controller', ['$scope', 'SongPlayer', function($s
      }
    };
  });
-<!---->
+blocJams.directive('slider', function(){
+  var updateSeekPercentage = function($seekBar, event) {
+     var barWidth = $seekBar.width();
+     var offsetX =  event.pageX - $seekBar.offset().left;
+ 
+     var offsetXPercent = (offsetX  / $seekBar.width()) * 100;
+     offsetXPercent = Math.max(0, offsetXPercent);
+     offsetXPercent = Math.min(100, offsetXPercent);
+ 
+     var percentageString = offsetXPercent + '%';
+     $seekBar.find('.fill').width(percentageString);
+     $seekBar.find('.thumb').css({left: percentageString});
+   }
+ 
+   return {
+     templateUrl: '/templates/directives/slider.html', 
+     replace: true,
+     restrict: 'E',
+    link: function(scope, element, attributes) {
+ 
+      var $seekBar = $(element);
+ 
+      $seekBar.click(function(event) {
+        updateSeekPercentage($seekBar, event);
+      });
+ 
+      $seekBar.find('.thumb').mousedown(function(event){
+        $seekBar.addClass('no-animate');
+ 
+        $(document).bind('mousemove.thumb', function(event){
+          updateSeekPercentage($seekBar, event);
+        });
+ 
+        //cleanup
+        $(document).bind('mouseup.thumb', function(){
+          $seekBar.removeClass('no-animate');
+          $(document).unbind('mousemove.thumb');
+          $(document).unbind('mouseup.thumb');
+        });
+ 
+      });
+    }
+  };
+});
 });
 
 ;require.register("scripts/collection", function(exports, require, module) {
